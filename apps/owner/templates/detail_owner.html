@@ -1,0 +1,106 @@
+{% extends 'shared/layouts/layout.html' %}
+{% load staticfiles %}
+
+{% block title %} Owner / Form {% endblock %}
+
+{% block body %}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">OWNER INFORMATION</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center">
+                <img alt="User Pic" src="{{ owner_info.photo.url}}" height="200" width="250" class="img-circle img-responsive">
+            </div>
+            <div class=" col-md-9 col-lg-9 ">
+                <table class="table table-user-information">
+                    <tbody>
+                    <tr>
+                        <td>Document:</td>
+                        <td>{{owner_info.document}}</td>
+                    </tr>
+                    <tr>
+                        <td>First Name:</td>
+                        <td>{{owner_info.first_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Lats Name:</td>
+                        <td>{{owner_info.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Age:</td>
+                        <td>{{owner_info.age}}</td>
+                    </tr>
+
+                    <tr>
+
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{ owner_info.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Cellphone:</td>
+                        <td>{{ owner_info.cellphone}}</td>
+                    </tr>
+                    <tr>
+                        <td>Date register:</td>
+                        <td>{{ owner_info.created}}</td>
+                    </tr>
+                    <tr>
+                        <td>Date modificate:</td>
+                        <td>{{ owner_info.modified}}</td>
+                    </tr>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="panel-heading">
+        <h3 class="panel-title">VEHICLES</h3>
+    </div>
+    <div class="upcoming py-5">
+        <div class="container">
+            <div class="row pt-4">
+                <div class="col-md-12">
+                    <a href="{% url 'vehicle:add'%}" class="btn btn-warning">Add new vehicle</a>
+                </div>
+            </div>
+            <hr>
+            <div class="row text-center">
+                {% if vehicles_list %}
+                {% for vehicle in vehicles_list %}
+                <div class="col-md-3 box border py-4">
+                    <div class="box-carimage">
+                        <img src="{{ vehicle.photo.url }}" alt="" width="200" height="300">
+                    </div>
+                    <div class="box-cartitle">
+                        <h4>{{ vehicle.type }} {{ vehicle.brand }} {{ vehicle.model }}</h4>
+                    </div>
+                    <div class="box-carprice">
+                        <h6><i class="fa fa-inr"></i>{{vehicle.enrollment}}, {{ vehicle.color }}</h6>
+                    </div>
+                    <div class="box-date pb-3">
+                        <small>Register Date: {{vehicle.created}}</small>
+                        <small>Modificated Date:{{vehicle.modified}}</small>
+
+                    </div>
+                    <a type="button" class="btn btn-outline-danger" href="{% url 'vehicle:edit' vehicle.id %}">Edit</a>
+                </div>
+                {% endfor%}
+                {% else %}
+                <h5>No hay registros disponibles</h5>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+

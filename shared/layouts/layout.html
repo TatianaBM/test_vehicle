@@ -1,0 +1,80 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Document {% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-confirm.min.css' %}">
+
+    {% block extraheader %}
+    {% endblock %}
+</head>
+<body>
+{% block header %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="{% url 'owner:list'%}">Vehicle Systems / {{ user.username }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home:index'%}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'vehicle:list'%}">Vehicles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'owner:list'%}">Owners</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'user:list'%}">Users</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                <form class="logout-link" method="post" action="{% url 'accounts:logout'%}">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-link">Log out</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+<div class="container">
+    <br>
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+
+    {% block body %}
+    {% endblock %}
+</div>
+
+
+{% block footer %}
+<footer class="page-footer font-small special-color-dark pt-4" id="footer">
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+        <a href="https://www.linkedin.com/in/jtbetancurmoreno"> Tatiana Betancur</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+{% endblock %}
+<script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.js'%}"></script>
+<script src="{% static 'js/jquery-confirm.min.js'%}"></script>
+<script src="{% static 'js/funtions_form.js'%}"></script>
+
+{% block extrajs %}
+{% endblock %}
+</body>
+</html>

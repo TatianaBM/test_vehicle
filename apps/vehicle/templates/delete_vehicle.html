@@ -1,0 +1,21 @@
+{% extends 'shared/layouts/layout.html' %}
+
+{% block title %}
+Vehicle / Delete
+{% endblock %}
+
+
+{% block body %}
+<div class="col-md-12" style="top:30px">
+    <div class="alert alert-warning" role="alert">
+       Delete vehicle
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <h3>Confirm delete {{context.brand}}</h3>
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'vehicle:list' %}" class="btn btn-warning">Returns</a>
+    </form>
+</div>
+
+{% endblock %}

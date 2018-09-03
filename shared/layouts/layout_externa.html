@@ -1,0 +1,80 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Document {% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block extraheader %}
+    {% endblock %}
+</head>
+<body>
+
+<section class="login-block">
+    <br>
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+
+    {% block body %}
+    {% endblock %}
+    </div>
+    <div class="col-md-8 banner-sec">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="carousel-item active">
+                    <img class="d-block img-fluid" src="{% static 'external_image/car_4.jpg' %}" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="banner-text">
+                            <h2>Vehicle company</h2>
+                            <p>Vehicle management system.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block img-fluid" src="{% static 'external_image/car_6.jpg' %}" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="banner-text">
+                            <h2>Vehicle company</h2>
+                            <p>Vehicle management system.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block img-fluid" src="{% static 'external_image/car_5.jpg' %}" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="banner-text">
+                            <h2>Vehicle company</h2>
+                            <p>Vehicle management system.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+{% block footer %}
+<footer class="page-footer font-small special-color-dark pt-4" id="footer">
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+        <a href="https://www.linkedin.com/in/jtbetancurmoreno"> Tatiana Betancur</a>
+    </div>
+    <!-- Copyright -->
+</footer>
+{% endblock %}
+<script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.js'%}"></script>
+
+{% block extrajs %}
+{% endblock %}
+
+</body>
+</html>

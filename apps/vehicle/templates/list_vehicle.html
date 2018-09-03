@@ -1,0 +1,74 @@
+{% extends 'shared/layouts/layout.html' %}
+
+{% block title %}
+Vehicles
+{% endblock %}
+
+{% block body %}
+<div class="clearfix"></div>
+<br>
+<br>
+<br>
+<form action="{% url 'vehicle:list' %}">
+    <div class="form-group row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <input class="form-control" name="parameter" id="parameter" value="{{ parameter }}">
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-info">Find</button>
+                <a type="submit" class="btn btn-info" href="{% url 'vehicle:list'%}">All</a>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="col-md-12">
+    <div style="margin-top:50px !important, margin-bottom:30px">
+        <a href="{% url 'vehicle:add'%}" class="btn btn-warning">Add new vehicle</a>
+    </div>
+</div>
+<br>
+<div class="col-md-12">
+
+    <table class="table tabled-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Enrollment</th>
+            <th scope="col">Type</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Model</th>
+            <th scope="col">Color</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% if vehicles %}
+        {% for vehicle in vehicles %}
+        <tr>
+            <td><img src="{{ vehicle.photo.url }}" height="80" width="80"></td>
+            <td>{{ vehicle.owner }}</td>
+            <td>{{ vehicle.enrollment }}</td>
+            <td>{{ vehicle.type}}</td>
+            <td>{{ vehicle.brand}}</td>
+            <td>{{ vehicle.model}}</td>
+            <td>{{ vehicle.color}}</td>
+            <td>{{ vehicle.description}}</td>
+            <td>
+                <a class="btn btn-warning" href="{% url 'vehicle:edit'  vehicle.id %}"><span class="fa fa-edit"></span></a>
+                <a class="btn btn-danger" href="{% url 'vehicle:delete'  vehicle.id %}"><span
+                        class="fa fa-trash"></span></a>
+            </td>
+        </tr>
+        {% endfor%}
+        {% else %}
+        <h5>No hay registros disponibles</h5>
+        {% endif %}
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

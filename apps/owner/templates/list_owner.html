@@ -1,0 +1,59 @@
+{% extends 'shared/layouts/layout.html' %}
+
+{% block title %}
+Owners
+{% endblock %}
+
+{% block body %}
+<div class="clearfix"></div>
+<br>
+<br>
+<br>
+<div class="col-md-12">
+    <div style="margin-top:50px !important, margin-bottom:30px">
+        <a href="{% url 'owner:add'%}" class="btn btn-warning">Add new owner</a>
+    </div>
+</div>
+<br>
+<div class="col-md-12">
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Photo</th>
+            <th scope="col">Document</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Cellphone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% if owners %}
+        {% for owner in owners %}
+        <tr>
+            <td><img src="{{ owner.photo.url }}" height="80" width="80"></td>
+            <td>{{ owner.document }}</td>
+            <td>{{ owner.first_name }}</td>
+            <td>{{ owner.last_name}}</td>
+            <td>{{ owner.age}}</td>
+            <td>{{ owner.cellphone}}</td>
+            <td>{{ owner.email}}</td>
+            <td>
+                <a class="btn btn-info" href="{% url 'owner:detail'  owner.id %}"><span class="fa fa-car"></span></a>
+                <a class="btn btn-warning" href="{% url 'owner:edit'  owner.id %}"><span class="fa fa-edit"></span></a>
+                <a class="btn btn-danger" href="{% url 'owner:delete'  owner.id %}"><span class="fa fa-trash"></span></a>
+            </td>
+        </tr>
+        {% endfor%}
+        {% else %}
+        <h5>No hay registros disponibles</h5>
+        {% endif %}
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}
